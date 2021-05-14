@@ -1,0 +1,51 @@
+body {
+ font-family: 'Roboto', sans-serif;
+ color: #ED1B2E;
+ padding: 5px;
+ text-align: left;
+}
+p {
+  font-family: 'Montserrat', sans-serif;
+  color: black
+}
+ul {
+ list-style-type: none;
+ color: black;
+ margin: 1px;
+ padding: 1px;
+ overflow: hidden;
+ background-color: white;
+ font-family: 'Raleway', sans-serif;
+ text-align: center;
+}
+
+li {
+ float: left;
+ border-right: 2px solid white;
+}
+
+/* Add a border to all( but not the last) list items */
+li:last-child {
+ border-right: none;
+}
+
+li a {
+ display: block;
+ color: black;
+ text-align: center;
+ padding: 15px 17px;
+ text-decoration: none;
+}
+
+/* Links will change color when hovered over */
+li a:hover {
+ background-color: #9F9FA3;
+}
+
+.active {
+ background-color: #9F9FA3;
+}
+
+a{
+  color: #004D7C;
+}
