@@ -82,6 +82,7 @@
     $(document).ready(function() {
       $.ajax({
         type: 'GET',
+
         // csv export link will be specific to the google sheet chosen
         url: 'https://docs.google.com/spreadsheets/d/1mHMKTTP1koXxcotgoGsoxS540_n7b5ItwQ5U57yDXjQ/gviz/tq?tqx=out:csv&sheet=Sheet1',
         dataType: "text",
@@ -116,10 +117,50 @@
               }
             });
 
+            // When a click event occurs on a feature in the csvData layer, open a popup at the
+            // location of the feature, with description HTML from its properties.
+            map.on('click', 'csvData', function(e) {
+              var coordinates = e.features[0].geometry.coordinates.slice();
 
+              //set popup text
+              //You can adjust the values of the popup to match the headers of your CSV.
+              // For example: e.features[0].properties.Name is retrieving information from the field Name in the original CSV.
+              var description = `<h3>` + e.features[0].properties.Name + `</h3>` + `<h5>` + `<b>` + `Address: ` + `</b>` + e.features[0].properties.Address + `</h5>` + `<h5>` + `<b>` + `Phone: ` + `</b>` + e.features[0].properties
+                .Phone + `</h5>`;
+
+              // Ensure that if the map is zoomed out such that multiple
+              // copies of the feature are visible, the popup appears
+              // over the copy being pointed to.
+              while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+                coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+              }
+
+              // add Popup to map
+              new mapboxgl.Popup()
+                .setLngLat(coordinates)
+                .setHTML(description)
+                .addTo(map);
+            });
+
+            // Change the cursor to a pointer when the mouse is over the places layer.
+            map.on('mouseenter', 'csvData', function() {
+              map.getCanvas().style.cursor = 'pointer';
+            });
+
+            // Change it back to a pointer when it leaves.
+            map.on('mouseleave', 'places', function() {
+              map.getCanvas().style.cursor = '';
+            });
+
+            // set the bounding box of the map to fit the data
+            //var bbox = turf.bbox(data);
+            //map.fitBounds(bbox, {
+            //  padding: 50
+            //});
           });
+
         });
-      });
+      };
     });
   </script>
 </body>
