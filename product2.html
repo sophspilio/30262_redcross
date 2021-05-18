@@ -3,18 +3,19 @@
 
 <head>
   <title>American Red Cross Disaster Mitigation</title>
-  <!-- Adding in the Leaflet CSS file -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" />
+  <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
   <!-- Adding styling info for the map -->
   <link href="https://fonts.googleapis.com/css2?family=Lato&family=Montserrat&family=Raleway&family=Roboto&display=swap" rel="stylesheet">
   <!-- Adding in the Mapbox CSS file -->
   <link href="https://api.mapbox.com/mapbox-gl-js/v1.7.0/mapbox-gl.css" rel="stylesheet" />
   <!-- Adding Mapbox JavaScript file -->
   <script src="https://api.mapbox.com/mapbox-gl-js/v1.7.0/mapbox-gl.js"></script>
-  <!-- Adding Leaflet JavaScript file -->
-  <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
+  <!-- Adding in javascript querying functionality -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js"></script>
   <!-- Adding in the ability to translate csv data to geojson -->
   <script src='https://npmcdn.com/csv2geojson@latest/csv2geojson.js'></script>
+  <!-- Adding in mapbox turf for analysis functionality -->
+  <script src='https://npmcdn.com/@turf/turf/turf.min.js'></script>
 
   <!-- Adding styling info for the map -->
   <style type="text/css">
@@ -48,6 +49,11 @@
   <div id='map'></div>
 
   <script>
+    // google sheet mapper tutorial: https://labs.mapbox.com/education/impact-tools/sheet-mapper/
+    // create a custom basemap
+    // add custom icon
+    // configure pop-ups
+
     // accessing sheetMapper funtionality
     var transformRequest = (url, resourceType) => {
       var isMapboxRequest =
@@ -70,6 +76,50 @@
       center: [-88.890574, 32.382033], // starting position [lng, lat]
       zoom: 4, // starting zoom
       transformRequest: transformRequest,
+    });
+
+    // connect the google sheets spreadsheet
+    $(document).ready(function() {
+      $.ajax({
+        type: 'GET',
+        // csv export link will be specific to the google sheet chosen
+        url: 'https://docs.google.com/spreadsheets/d/1mHMKTTP1koXxcotgoGsoxS540_n7b5ItwQ5U57yDXjQ/gviz/tq?tqx=out:csv&sheet=Sheet1',
+        dataType: "text",
+        success: function(csvData) {
+          makeGeoJSON(csvData);
+        }
+      });
+
+      // turn the csv data into a geojson with lat and lon fields
+      function makeGeoJSON(csvData) {
+        csv2geojson.csv2geojson(csvData, {
+          latfield: 'Latitude',
+          lonfield: 'Longitude',
+          delimiter: ','
+        }, function(err, data) {
+          map.on('load', function() {
+
+            // add the layer to the map
+            map.addLayer({
+              'id': 'csvData',
+              'type': 'circle',
+              'source': {
+                'type': 'geojson',
+                'data': data
+              },
+              // symbologize the points
+              'paint': {
+                'circle-radius': 5,
+                'circle-color': '#ffc500',
+                'circle-stroke-color': '#dc921c',
+                'circle-stroke-width': 2,
+              }
+            });
+
+
+          });
+        });
+      });
     });
   </script>
 </body>
