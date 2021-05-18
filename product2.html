@@ -5,13 +5,24 @@
   <title>American Red Cross Disaster Mitigation</title>
   <!-- Adding in the Leaflet CSS file -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" />
-  <!-- Adding Leaflet JavaScript file -->
-  <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
   <!-- Adding styling info for the map -->
   <link href="https://fonts.googleapis.com/css2?family=Lato&family=Montserrat&family=Raleway&family=Roboto&display=swap" rel="stylesheet">
-  <style type="text/css">
+  <!-- Adding in the Mapbox CSS file -->
+  <link href="https://api.mapbox.com/mapbox-gl-js/v1.7.0/mapbox-gl.css" rel="stylesheet" />
+  <!-- Adding Mapbox JavaScript file -->
+  <script src="https://api.mapbox.com/mapbox-gl-js/v1.7.0/mapbox-gl.js"></script>
+  <!-- Adding Leaflet JavaScript file -->
+  <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
+  <!-- Adding in the ability to translate csv data to geojson -->
+  <script src='https://npmcdn.com/csv2geojson@latest/csv2geojson.js'></script>
 
-    /* Add a CSS rule that selects an element with the ID "mapId" and gives it a height of 600 pixels */
+  <!-- Adding styling info for the map -->
+  <style type="text/css">
+    /* Add a CSS rule that selects an element with the ID "map" and gives it a height of 600 pixels */
+    #map {
+      border-radius: 10px;
+      height: 600px;
+    }
   </style>
   <!-- Adding styling info for page layout by reading in a CSS file -->
   <link rel="stylesheet" href="styles.css">
@@ -22,16 +33,45 @@
   <!-- Add multiple pages to web page-->
   <!-- active class displays the grey box around current page-->
   <ul>
-  	<li><a class="active" href="index.html" target="_self">Overview</a></li>
+    <li><a href="index.html" target="_self">Overview</a></li>
     <li><a href="product1.link" target="_self">Product 1</a></li>
-    <li><a href="product2.html" target="_self">Product 2</a></li>
+    <li><a class="active" href="product2.html" target="_self">Product 2</a></li>
     <li><a href="product3.link" target="_self">Product 3</a></li>
     <li><a href="product4.link" target"_self">Product 4</a></li>
   </ul>
   <br>
-<p> Executive Summary goes here </p>
-<!-- ADD IN EXECUTIVE SUMMARY -->
+  <div>
+    <p>Leaflet WebMap of Past Hurricane Relief Efforts</p>
+  </div>
 
+  <!-- Add a div to give the map somewhere to go -->
+  <div id='map'></div>
+
+  <script>
+    // accessing sheetMapper funtionality
+    var transformRequest = (url, resourceType) => {
+      var isMapboxRequest =
+        url.slice(8, 22) === 'api.mapbox.com' ||
+        url.slice(10, 26) === 'tiles.mapbox.com';
+      return {
+        url: isMapboxRequest ?
+          url.replace('?', '?pluginName=sheetMapper&') : url,
+      };
+    };
+
+    // add mapbox access token
+    mapboxgl.accessToken =
+      'pk.eyJ1IjoianN0cnplbXBrbyIsImEiOiJja2xoN3FnaHMwMHVnMnVtZ3R4ZGhyMWlkIn0.A-mfTeGCl1XSWMWhimG5HA';
+
+    // add map variable with settings
+    var map = new mapboxgl.Map({
+      container: 'map', // container id
+      style: 'mapbox://styles/jstrzempko/cko4erp7n15kx17s8s4dnpbry', // custom style
+      center: [-88.890574, 32.382033], // starting position [lng, lat]
+      zoom: 4, // starting zoom
+      transformRequest: transformRequest,
+    });
+  </script>
 </body>
 
 </html>
