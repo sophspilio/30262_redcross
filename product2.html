@@ -72,7 +72,7 @@
     // add map variable with settings
     var map = new mapboxgl.Map({
       container: 'map', // container id
-      style: 'mapbox://styles/jstrzempko/cko4erp7n15kx17s8s4dnpbry', // custom style
+      style: 'mapbox://styles/jstrzempko/ckouhee5l299v17rsh1ea6gvm', // custom style
       center: [-88.890574, 32.382033], // starting position [lng, lat]
       zoom: 4, // starting zoom
       transformRequest: transformRequest,
@@ -103,17 +103,16 @@
             // add the layer to the map
             map.addLayer({
               'id': 'csvData',
-              'type': 'circle',
               'source': {
                 'type': 'geojson',
                 'data': data
               },
               // symbologize the points
-              'paint': {
-                'circle-radius': 5,
-                'circle-color': '#ffc500',
-                'circle-stroke-color': '#dc921c',
-                'circle-stroke-width': 2,
+              'type': 'symbol',
+              'layout': {
+                'icon-image': 'hurricane',
+                'icon-size': .25,
+                'icon-allow-overlap': true,
               }
             });
 
