@@ -24,6 +24,57 @@
       border-radius: 10px;
       height: 600px;
     }
+
+    /* Popup styling */
+    .mapboxgl-popup {
+      padding-bottom: 5px;
+      border-radius: 10px;
+    }
+
+    .mapboxgl-popup-close-button {
+      display: none;
+    }
+
+    .mapboxgl-popup-content {
+      font: 400 15px/22px 'ubunturegular', 'Source Sans Pro', 'Helvetica Neue', Sans-serif;
+      padding: 0;
+      width: 250px;
+    }
+
+    .mapboxgl-popup-content-wrapper {
+      padding: 1%;
+    }
+
+    .mapboxgl-popup-content h3 {
+      background: #333377;
+      text-align: center;
+      color: #fff;
+      margin: 0;
+      display: block;
+      padding: 15px;
+      font-weight: 700;
+      margin-top: -5px;
+    }
+
+    .mapboxgl-popup-content h5 {
+      margin: 0;
+      display: block;
+      color: #000;
+      padding: 10px 3px 10px 10px;
+      font-weight: 400;
+    }
+
+    .mapboxgl-container {
+      cursor: pointer;
+    }
+
+    .mapboxgl-popup-anchor-top>.mapboxgl-popup-content {
+      margin-top: 3px;
+    }
+
+    .mapboxgl-popup-anchor-top>.mapboxgl-popup-tip {
+      border-bottom-color: #333377;
+    }
   </style>
   <!-- Adding styling info for page layout by reading in a CSS file -->
   <link rel="stylesheet" href="styles.css">
@@ -124,8 +175,7 @@
               //set popup text
               //You can adjust the values of the popup to match the headers of your CSV.
               // For example: e.features[0].properties.Name is retrieving information from the field Name in the original CSV.
-              var description = `<h3>` + e.features[0].properties.Name + `</h3>` + `<h5>` + `<b>` + `Address: ` + `</b>` + e.features[0].properties.Address + `</h5>` + `<h5>` + `<b>` + `Phone: ` + `</b>` + e.features[0].properties
-                .Phone + `</h5>`;
+              var description = `<h3>` + e.features[0].properties.Hurricane + `</h3>` + `<h5>` + `<b>` + `Year: ` + `</b>` + e.features[0].properties.Year + `</h5>`;
 
               // Ensure that if the map is zoomed out such that multiple
               // copies of the feature are visible, the popup appears
