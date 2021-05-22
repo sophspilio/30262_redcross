@@ -16,6 +16,10 @@
   <script src='https://npmcdn.com/csv2geojson@latest/csv2geojson.js'></script>
   <!-- Adding in mapbox turf for analysis functionality -->
   <script src='https://npmcdn.com/@turf/turf/turf.min.js'></script>
+  <!-- Link to google fonts-->
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <!-- Link to Padauk and Abel-->
+  <link href="https://fonts.googleapis.com/css2?family=Abel&family=KoHo&display=swap" rel="stylesheet">
 
   <!-- Adding styling info for the map -->
   <style type="text/css">
@@ -36,32 +40,53 @@
     }
 
     .mapboxgl-popup-content {
-      font: 400 15px/22px 'ubunturegular', 'Source Sans Pro', 'Helvetica Neue', Sans-serif;
+      font: 400 15px/22px;
       padding: 0;
-      width: 250px;
+      width: 275px;
     }
 
     .mapboxgl-popup-content-wrapper {
       padding: 1%;
     }
 
-    .mapboxgl-popup-content h3 {
+    .mapboxgl-popup-content h1 {
+      font-family: 'KoHo', sans-serif;
+      line-height: normal;
       background: #333377;
       text-align: center;
       color: #fff;
       margin: 0;
       display: block;
       padding: 15px;
-      font-weight: 700;
       margin-top: -5px;
     }
 
-    .mapboxgl-popup-content h5 {
-      margin: 0;
+    .mapboxgl-popup-content h2 a:link {
+      font-family: 'Abel', sans-serif;
+      font-size: 16px;
+      margin: 10px;
       display: block;
       color: #000;
-      padding: 10px 3px 10px 10px;
+      padding: 10px 10px 10px 10px;
       font-weight: 400;
+    }
+
+    .mapboxgl-popup-content h2 a:hover {
+      font-family: 'Abel', sans-serif;
+      font-size: 16px;
+      margin: 10px;
+      display: block;
+      color: #000;
+      padding: 2px 10px 2px 10px;
+      font-weight: 400;
+    }
+
+    .mapboxgl-popup-content h3 {
+      font-family: 'Abel', sans-serif;
+      display: block;
+      font-size: 15px;
+      color: #000;
+      padding: 2px 10px 2px 10px;
     }
 
     .mapboxgl-container {
@@ -94,6 +119,7 @@
   <br>
   <div>
     <p>Leaflet WebMap of Past Hurricane Relief Efforts</p>
+    <p>add a little disclaimer about the fact that the points in the general area where the storms touched down and where the American Red Cross responded to the disaster event. They are not meant to meteorologically rigorous.</p>
   </div>
 
   <!-- Add a div to give the map somewhere to go -->
@@ -125,7 +151,7 @@
       container: 'map', // container id
       style: 'mapbox://styles/jstrzempko/ckouhee5l299v17rsh1ea6gvm', // custom style
       center: [-88.890574, 32.382033], // starting position [lng, lat]
-      zoom: 4, // starting zoom
+      zoom: 3, // starting zoom
       transformRequest: transformRequest,
     });
 
@@ -175,7 +201,8 @@
               //set popup text
               //You can adjust the values of the popup to match the headers of your CSV.
               // For example: e.features[0].properties.Name is retrieving information from the field Name in the original CSV.
-              var description = `<h3>` + e.features[0].properties.Hurricane + `</h3>` + `<h5>` + `<b>` + `Year: ` + `</b>` + e.features[0].properties.Year + `</h5>` + `<h5>` + `<a href="` + e.features[0].properties.Link + `">Link to further information</a>` + `</h5>`;
+              var description = `<h1>` + e.features[0].properties.Hurricane + ` (` + e.features[0].properties.Year + `)` + `</h1>` + `<h2>` + `<b>` + `</b>` + `</h2>` + `<h3>` + e.features[0].properties.Blurb + `</h3>` + `<h2>` +
+                `<a href="` + e.features[0].properties.Link + `">Link to further information</a>` + `</h2>`;
 
               // Ensure that if the map is zoomed out such that multiple
               // copies of the feature are visible, the popup appears
@@ -202,10 +229,10 @@
             });
 
             // set the bounding box of the map to fit the data
-            //var bbox = turf.bbox(data);
-            //map.fitBounds(bbox, {
-            //  padding: 50
-            //});
+            var bbox = turf.bbox(data);
+            map.fitBounds(bbox, {
+              padding: 50
+            });
           });
 
         });
