@@ -143,6 +143,8 @@
 </head>
 
 <body>
+  <!-- Load the `mapbox-gl-geocoder` plugin. -->
+  <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.min.js"></script>
   <h1>American Red Cross <br> Disaster Mitigation using Web Mapping </h1>
   <!-- Add multiple pages to web page-->
   <!-- active class displays the grey box around current page-->
@@ -169,15 +171,26 @@
   <!-- Add a div to give the map somewhere to go -->
   <div id='map' style="width: 1000px; height: 600px"></div>
 
-  <!-- Add space between the map and image -->
+  <!-- Add information about the Prototype -->
   <div>
-    <h1></h1>
+    <p style="font-weight:600; font-size:25px; width: 1000px">Discuss the Prototype</p>
+    <p>Briefly talk about the prototype you created, what tools you used to create it and why you chose those particular tools. Briefly discuss the advantages and limitations of your tools (example: “the map is created in Leaflet, which would require
+      an existing web site to be hosted on.”)</p>
   </div>
 
-  <!-- Add more imags below map
+  <!-- Add more imags below map-->
   <div>
-    <img src="images/vest.jpeg" width="1000px">
-  </div>-->
+    <p style="text-align:center;"><img src="images/vest.jpeg" width="600px"></p>
+  </div>
+
+  <!-- Add information about Data -->
+  <div>
+    <p style="font-weight:600; font-size:25px; width: 1000px">Data</p>
+    <p>Whether the data you’re using are real or created you should briefly describe it. This can be done as a separate section, or part of the write up for each prototype. It may even figure into the introduction.
+      You should discuss where it came from (provide relevant links/citations) and if you’ve created “dummy data” that’s fine, but link to where the raw data are or briefly explain what they are (e.g. point, line, polygon, what are the attributes) to
+      give the client an idea about what data they would need to have to properly realize your prototype. In all cases you should briefly discuss the advantages and limitations of the data.</p>
+  </div>
+
 
   <script>
     // google sheet mapper tutorial: https://labs.mapbox.com/education/impact-tools/sheet-mapper/
