@@ -18,8 +18,8 @@
   <script src='https://npmcdn.com/@turf/turf/turf.min.js'></script>
   <!-- Link to google fonts-->
   <link rel="preconnect" href="https://fonts.gstatic.com">
-  <!-- Link to Padauk and Abel-->
-  <link href="https://fonts.googleapis.com/css2?family=Abel&family=KoHo&display=swap" rel="stylesheet">
+  <!-- Link to KoHo and Montserrat-->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=KoHo&display=swap" rel="stylesheet">
 
   <!-- Adding styling info for the map -->
   <style type="text/css">
@@ -27,6 +27,34 @@
     #map {
       border-radius: 10px;
       height: 600px;
+    }
+
+    /* Override styles.css styling */
+    a {
+      color: none;
+      text-decoration: none;
+    }
+
+    a:hover {
+      color: none;
+    }
+
+    button {
+      background-color: #ED1B2E;
+      /* red */
+      border: none;
+      color: white;
+      padding: 15px 32px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+    }
+
+    button:hover {
+      background-color: white;
+      color: white;
+      border: 2px solid #ED1B2E;
     }
 
     /* Popup styling */
@@ -52,7 +80,7 @@
     .mapboxgl-popup-content h1 {
       font-family: 'KoHo', sans-serif;
       line-height: normal;
-      background: #333377;
+      background: #ff000f;
       text-align: center;
       color: #fff;
       margin: 0;
@@ -62,7 +90,7 @@
     }
 
     .mapboxgl-popup-content h2 a:link {
-      font-family: 'Abel', sans-serif;
+      font-family: 'KoHo', sans-serif;;
       font-size: 16px;
       margin: 10px;
       display: block;
@@ -72,21 +100,22 @@
     }
 
     .mapboxgl-popup-content h2 a:hover {
-      font-family: 'Abel', sans-serif;
+      font-family: 'KoHo', sans-serif;
       font-size: 16px;
       margin: 10px;
       display: block;
-      color: #000;
-      padding: 2px 10px 2px 10px;
-      font-weight: 400;
+      color: white;
+      padding: 10px 10px 10px 10px;
+      font-weight: 600;
     }
 
     .mapboxgl-popup-content h3 {
-      font-family: 'Abel', sans-serif;
+      font-family: 'KoHo', sans-serif;
       display: block;
       font-size: 15px;
       color: #000;
       padding: 2px 10px 2px 10px;
+      font-weight: 400;
     }
 
     .mapboxgl-container {
@@ -98,7 +127,7 @@
     }
 
     .mapboxgl-popup-anchor-top>.mapboxgl-popup-tip {
-      border-bottom-color: #333377;
+      border-bottom-color: #ff000f;
     }
   </style>
   <!-- Adding styling info for page layout by reading in a CSS file -->
@@ -117,13 +146,26 @@
     <li><a href="product4.html" target"_self">Product 4</a></li>
   </ul>
   <br>
+  <!-- Add some images of volunteers -->
   <div>
-    <p>Leaflet WebMap of Past Hurricane Relief Efforts</p>
-    <p>add a little disclaimer about the fact that the points in the general area where the storms touched down and where the American Red Cross responded to the disaster event. They are not meant to meteorologically rigorous.</p>
+    <img src="images/relief_volunteer.jpeg" width="1000px">
+  </div>
+  <div width="1000px">
+    <p style="font-weight:600; font-size:25px">Interactive Web Map of Hurricane Relief Efforts</p>
+    <p>Below you will find a web map of past hurricane relief projects American Red Cross has engaged in over the past decade. By clicking on a hurricane symbol, you will be given information on the timeline, response, and finances of ARC's relief efforts. The hurricane symbols are located near where each made landfall in the United States and represent the area of first response for ARC. In subsequent months and years, ARC has assisted families and individuals in long-term recovery through consistent check-ins, construction and repair assistance, provision of mental health resources, and awarding of recovery grants.</p>
   </div>
 
   <!-- Add a div to give the map somewhere to go -->
   <div id='map'></div>
+
+  <!-- Add space between the map and image -->
+  <div>
+    <h1></h1>
+  </div>
+  <!-- Add more imags below map -->
+  <div>
+    <img src="images/vest.jpeg" width="1000px">
+  </div>
 
   <script>
     // google sheet mapper tutorial: https://labs.mapbox.com/education/impact-tools/sheet-mapper/
@@ -201,8 +243,11 @@
               //set popup text
               //You can adjust the values of the popup to match the headers of your CSV.
               // For example: e.features[0].properties.Name is retrieving information from the field Name in the original CSV.
-              var description = `<h1>` + e.features[0].properties.Hurricane + ` (` + e.features[0].properties.Year + `)` + `</h1>` + `<h2>` + `<b>` + `</b>` + `</h2>` + `<h3>` + e.features[0].properties.Blurb + `</h3>` + `<h2>` +
-                `<a href="` + e.features[0].properties.Link + `">Link to further information</a>` + `</h2>`;
+
+              var description = '<h1>' + e.features[0].properties.Hurricane + ' (' + e.features[0].properties.Year + ')' + '</h1>' + '<h2>' + '</b>' + '</h2>' + '<h3>' + 'In the aftermath of ' + '<b>' + e.features[0].properties
+                .Hurricane + '</b>' + ' in ' + '<b>' + e.features[0].properties.Location + '</b>' + ', American Red Cross provided ' + '<b>' + e.features[0].properties.Items + '</b>' + ' relief items, ' + '<b>' + e.features[0]
+                .properties.Meals + '</b>' + ' meals and snacks, and ' + '<b>' + e.features[0].properties.Overnight + '</b>' + ' overnight stays in shelters to families in need. ARC has additionally given ' + '<b>' + e.features[0]
+                .properties.Households + '</b>' + ' households ' + '<b>' + e.features[0].properties.Grants + '</b>' + ' in long-term recovery funds.' +  `</h3>` + `<h2>` + `<a href="` + e.features[0].properties.Link + `">Link to further information</a>` + `</h2>`;
 
               // Ensure that if the map is zoomed out such that multiple
               // copies of the feature are visible, the popup appears

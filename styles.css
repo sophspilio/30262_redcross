@@ -56,7 +56,7 @@ a:hover{
 }
 button {
   background-color: #ED1B2E; /* red */
-  border: none;
+  border: 2px solid #fff;
   color: white;
   padding: 15px 32px;
   text-align: center;
