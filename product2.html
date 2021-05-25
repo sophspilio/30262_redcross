@@ -39,6 +39,10 @@
       color: none;
     }
 
+    p {
+      width: 1000px;
+    }
+
     button {
       background-color: #ED1B2E;
       /* red */
@@ -90,7 +94,8 @@
     }
 
     .mapboxgl-popup-content h2 a:link {
-      font-family: 'KoHo', sans-serif;;
+      font-family: 'KoHo', sans-serif;
+      ;
       font-size: 16px;
       margin: 10px;
       display: block;
@@ -151,21 +156,24 @@
     <img src="images/relief_volunteer.jpeg" width="1000px">
   </div>
   <div width="1000px">
-    <p style="font-weight:600; font-size:25px">Interactive Web Map of Hurricane Relief Efforts</p>
-    <p>Below you will find a web map of past hurricane relief projects American Red Cross has engaged in over the past decade. By clicking on a hurricane symbol, you will be given information on the timeline, response, and finances of ARC's relief efforts. The hurricane symbols are located near where each made landfall in the United States and represent the area of first response for ARC. In subsequent months and years, ARC has assisted families and individuals in long-term recovery through consistent check-ins, construction and repair assistance, provision of mental health resources, and awarding of recovery grants.</p>
+    <p style="font-weight:600; font-size:25px; width: 1000px">Interactive Web Map of Hurricane Relief Efforts</p>
+    <p>Below you will find a web map of past hurricane relief projects American Red Cross has engaged in over the past decade. By clicking on a hurricane symbol, you will be given information on the timeline, response, and finances of ARC's relief
+      efforts. The hurricane symbols are located near where each made landfall in the United States and represent the area of first response for ARC. In subsequent months and years, ARC has assisted families and individuals in long-term recovery
+      through consistent check-ins, construction and repair assistance, provision of mental health resources, and awarding of recovery grants.</p>
   </div>
 
   <!-- Add a div to give the map somewhere to go -->
-  <div id='map'></div>
+  <div id='map' style="width: 1000px; height: 600px"></div>
 
   <!-- Add space between the map and image -->
   <div>
     <h1></h1>
   </div>
-  <!-- Add more imags below map -->
+
+  <!-- Add more imags below map
   <div>
     <img src="images/vest.jpeg" width="1000px">
-  </div>
+  </div>-->
 
   <script>
     // google sheet mapper tutorial: https://labs.mapbox.com/education/impact-tools/sheet-mapper/
@@ -247,7 +255,8 @@
               var description = '<h1>' + e.features[0].properties.Hurricane + ' (' + e.features[0].properties.Year + ')' + '</h1>' + '<h2>' + '</b>' + '</h2>' + '<h3>' + 'In the aftermath of ' + '<b>' + e.features[0].properties
                 .Hurricane + '</b>' + ' in ' + '<b>' + e.features[0].properties.Location + '</b>' + ', American Red Cross provided ' + '<b>' + e.features[0].properties.Items + '</b>' + ' relief items, ' + '<b>' + e.features[0]
                 .properties.Meals + '</b>' + ' meals and snacks, and ' + '<b>' + e.features[0].properties.Overnight + '</b>' + ' overnight stays in shelters to families in need. ARC has additionally given ' + '<b>' + e.features[0]
-                .properties.Households + '</b>' + ' households ' + '<b>' + e.features[0].properties.Grants + '</b>' + ' in long-term recovery funds.' +  `</h3>` + `<h2>` + `<a href="` + e.features[0].properties.Link + `">Link to further information</a>` + `</h2>`;
+                .properties.Households + '</b>' + ' households ' + '<b>' + e.features[0].properties.Grants + '</b>' + ' in long-term recovery funds.' + `</h3>` + `<h2>` + `<a href="` + e.features[0].properties.Link +
+                `">Link to further information</a>` + `</h2>`;
 
               // Ensure that if the map is zoomed out such that multiple
               // copies of the feature are visible, the popup appears
@@ -283,6 +292,26 @@
         });
       };
     });
+
+    // Add a search box: https://docs.mapbox.com/mapbox-gl-js/example/mapbox-gl-geocoder/
+    // Add the control to the map.
+    map.addControl(
+      new MapboxGeocoder({
+        accessToken: mapboxgl.accessToken,
+        mapboxgl: mapboxgl
+      })
+    );
+
+    // Add pan and zoom controls: https://docs.mapbox.com/mapbox-gl-js/api/#map#addcontrol
+    map.addControl(new mapboxgl.NavigationControl());
+
+    // Add a geolocation button: https://docs.mapbox.com/mapbox-gl-js/api/#geolocatecontrol
+    map.addControl(new mapboxgl.GeolocateControl({
+      positionOptions: {
+        enableHighAccuracy: true
+      },
+      trackUserLocation: true
+    }));
   </script>
 </body>
 
