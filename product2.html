@@ -28,7 +28,7 @@
       border-style: double;
       border-radius: 10px;
       border-width: 5px;
-      border-color: #ff000f;
+      border-color: #ed1b2e;
       height: 600px;
     }
 
@@ -87,7 +87,7 @@
     .mapboxgl-popup-content h1 {
       font-family: 'KoHo', sans-serif;
       line-height: normal;
-      background: #ff000f;
+      background: #ed1b2e;
       text-align: center;
       color: #fff;
       margin: 0;
@@ -135,7 +135,7 @@
     }
 
     .mapboxgl-popup-anchor-top>.mapboxgl-popup-tip {
-      border-bottom-color: #ff000f;
+      border-bottom-color: #ed1b2e;
     }
   </style>
   <!-- Adding styling info for page layout by reading in a CSS file -->
@@ -174,13 +174,26 @@
   <!-- Add information about the Prototype -->
   <div>
     <p style="font-weight:600; font-size:25px; width: 1000px">Discuss the Prototype</p>
-    <p><a href="https://docs.google.com/spreadsheets/d/1mHMKTTP1koXxcotgoGsoxS540_n7b5ItwQ5U57yDXjQ/edit?usp=sharing">Link to the Data in Google Sheets</a></p>
-    <p><a href="https://github.com/mapbox/csv2geojson">csv2geojson</a> converts csv files to geojson files
-      <a href="https://jquery.com/">JQuery JavaScript library</a> to add functionality to the map - interactivity in terms of the pop-ups</p>
     <p>The prototype for Product 2 is an interactive web map of past ARC hurricane relief projects. This prototype was created using <a href="https://www.mapbox.com/mapbox-gljs">Mapbox GL JS</a>, a <a
-        href="https://docs.mapbox.com/mapbox-gl-js/api/">JavaScript library</a> that uses WebGL and Mapbox functionality in tandem to display interactive web maps with vector tiles and custom Mapbox styles. Additionally, the script referenced.
-      Briefly talk about the prototype you created, what tools you used to create it and why you chose those particular tools. Briefly discuss the advantages and limitations of your tools (example: “the map is created in Leaflet, which would require
-      an existing web site to be hosted on.”)</p>
+        href="https://docs.mapbox.com/mapbox-gl-js/api/">JavaScript library</a> that uses WebGL and Mapbox functionality in tandem to display interactive web maps with vector tiles and custom Mapbox styles. Mapbox was chosen to create this particular
+      product because it can be used to produced clean and attractive web maps with interactive content, particularly useful capabilities for a public-facing map. The ability to customize the basemap and corresponding feature icons is additionally
+      advantageous to ARC if they planned to expand the purpose of this map to include all of their disaster relief work across the United States, from wildfires to floods to hurricanes. All Mapbox products begin with a free tier that would allow ARC
+      to explore the potential of web maps for branding and communicating their work. Beyond free use, Mapbox scales the price of usage based on volume of traffic to a site meaning that the price would increase the more the map is shared and viewed.
+      Despite the cost, Mapbox understands the impact of their platform and exercises generosity with partner organizations.</p></br>
+    <p>The Javascript used to build the web map makes use of a Mapbox Impact tool called <a href="https://www.mapbox.com/impact-tools/sheet-mapper">Sheet Mapper</a>, which utilizes the set of functions within <a
+        href="https://github.com/mapbox/csv2geojson">csv2geojson</a> to parse a Google Sheet or CSV file to derive a GeoJSON FeatureCollection object for use in a web map. The workflow makes use of latitude and longitude fields in the rows of a
+      Google Sheet or CSV file to generate spatial data. Sheet Mapper is a blueprint for organizations that would like to map data from a CSV or Google Sheet to display shelters, events, offices, and more, and was chosen specifically for this reason.
+      As a large non-governmental organization focused on on-the-ground work and direct assistance, ARC may not have the technical capacity for more complex spatial data collection beyond the creation of a spreadsheet. Furthermore, the use of a
+      Google Sheet to generate and manage this data means that the data can be shared within the organization and widely contributed to.</p></br>
+    <p>The last tool the product makes use of is the <a href="https://jquery.com/">JQuery JavaScript library</a> which adds functionality and interactiveity to the map through pop-ups. This way when a user clicks on a hurricane point, they receive
+      information about the particular work ARC conducted in the area in response to the disaster. The addition of the pop-up further allows ARC to add a link to their page with more in depth information about their disaster response and relief work.
+      This channels traffic toward the ARC site, where the public may be more inclined to donate after seeing a demonstration of what their money would go toward.</p></br>
+    <p>The intention of this prototype is display where ARC is working on <a href="https://www.redcross.org/about-us/our-work/disaster-relief/hurricane-relief.html">hurricane relief projects</a> throughout the United States in a manner that
+      emphasizes the priorities of the organization - namely, helping as many individuals as possible through disaster relief. By displaying information about amount of people help, dollars raised and spent, and relief items distributed, the maps
+      turns data collected by the organization into a short blurb for the public to explore and consume. In this manner, the web map converts internal organizational data into simple point data with corresponding pop-ups for use by donors,
+      decisionmakers, and the public. The overall benefit of these tools working in tandem is that once set up, ARC need only edit the Google Sheet with new data as they generate and receive it in order to update the map. Instead of having to create
+      a new GeoJSON file everytime more data points are added, Sheet Mapper performs the critical step of generating spatial data with little trouble and maintenance needed. Drawbacks include difficulty in changing the structure or function of the
+      web map without knowledge of HTML, CSS, or JavaScript as well as the need to pay Mapbox for widespread sharing and viewing of the map.</p></br>
   </div>
 
   <!-- Add more imags below map-->
@@ -191,6 +204,7 @@
   <!-- Add information about Data -->
   <div>
     <p style="font-weight:600; font-size:25px; width: 1000px">Data</p>
+    <p><a href="https://docs.google.com/spreadsheets/d/1mHMKTTP1koXxcotgoGsoxS540_n7b5ItwQ5U57yDXjQ/edit?usp=sharing">Link to the Data in Google Sheets</a></p>
     <p>Whether the data you’re using are real or created you should briefly describe it. This can be done as a separate section, or part of the write up for each prototype. It may even figure into the introduction.
       You should discuss where it came from (provide relevant links/citations) and if you’ve created “dummy data” that’s fine, but link to where the raw data are or briefly explain what they are (e.g. point, line, polygon, what are the attributes) to
       give the client an idea about what data they would need to have to properly realize your prototype. In all cases you should briefly discuss the advantages and limitations of the data.</p>
