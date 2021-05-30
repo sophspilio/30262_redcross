@@ -4,8 +4,6 @@
 <head>
   <title>American Red Cross Disaster Mitigation</title>
   <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
-  <!-- Adding styling info for the map -->
-  <link href="https://fonts.googleapis.com/css2?family=Lato&family=Montserrat&family=Raleway&family=Roboto&display=swap" rel="stylesheet">
   <!-- Adding in the Mapbox CSS file -->
   <link href="https://api.mapbox.com/mapbox-gl-js/v1.7.0/mapbox-gl.css" rel="stylesheet" />
   <!-- Adding Mapbox JavaScript file -->
@@ -19,8 +17,7 @@
   <!-- Link to google fonts-->
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <!-- Link to KoHo and Montserrat-->
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=KoHo&display=swap" rel="stylesheet">
-
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=KoHo&family=Questrial&display=swap" rel="stylesheet">
   <!-- Adding styling info for the map -->
   <style type="text/css">
     /* Add a CSS rule that selects an element with the ID "map" and gives it a height of 600 pixels */
@@ -40,10 +37,6 @@
 
     a:hover {
       color: none;
-    }
-
-    p {
-      width: 1000px;
     }
 
     button {
@@ -143,8 +136,6 @@
 </head>
 
 <body>
-  <!-- Load the `mapbox-gl-geocoder` plugin. -->
-  <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.min.js"></script>
   <h1>American Red Cross <br> Disaster Mitigation using Web Mapping </h1>
   <!-- Add multiple pages to web page-->
   <!-- active class displays the grey box around current page-->
@@ -173,7 +164,7 @@
 
   <!-- Add information about the Prototype -->
   <div>
-    <p style="font-weight:600; font-size:25px; width: 1000px">Discuss the Prototype</p>
+    <p style="font-weight:600; font-size:25px; width: 1000px">The Prototype</p>
     <p>The prototype for Product 2 is an interactive web map of past ARC hurricane relief projects. This prototype was created using <a href="https://www.mapbox.com/mapbox-gljs">Mapbox GL JS</a>, a <a
         href="https://docs.mapbox.com/mapbox-gl-js/api/">JavaScript library</a> that uses WebGL and Mapbox functionality in tandem to display interactive web maps with vector tiles and custom Mapbox styles. Mapbox was chosen to create this particular
       product because it can be used to produced clean and attractive web maps with interactive content, particularly useful capabilities for a public-facing map. The ability to customize the basemap and corresponding feature icons is additionally
@@ -203,11 +194,18 @@
 
   <!-- Add information about Data -->
   <div>
-    <p style="font-weight:600; font-size:25px; width: 1000px">Data</p>
-    <p><a href="https://docs.google.com/spreadsheets/d/1mHMKTTP1koXxcotgoGsoxS540_n7b5ItwQ5U57yDXjQ/edit?usp=sharing">Link to the Data in Google Sheets</a></p>
-    <p>Whether the data you’re using are real or created you should briefly describe it. This can be done as a separate section, or part of the write up for each prototype. It may even figure into the introduction.
-      You should discuss where it came from (provide relevant links/citations) and if you’ve created “dummy data” that’s fine, but link to where the raw data are or briefly explain what they are (e.g. point, line, polygon, what are the attributes) to
-      give the client an idea about what data they would need to have to properly realize your prototype. In all cases you should briefly discuss the advantages and limitations of the data.</p>
+    <p style="font-weight:600; font-size:25px; width: 1000px">The Data</p>
+    <p>The data is sourced from the American Red Cross's <a href="https://www.redcross.org/about-us/our-work/disaster-relief/hurricane-relief.html">Hurricane Relief</a> website under the heading Recent Hurricane and Typhoon Relief Efforts. In this
+      section of the webpage, there are links to pages with information about the assistance ARC has provided in the wake of a particular hurricane. Linked out from these pages are PDF documents giving long-term updates (six months, one year, or two
+      years typically) that include numbers of people helped and resources distributed. These documents were manually searched for information regarding meals and snacks served, relief items distributed, overnight shelter stays provided, households
+      given financial assistance, and amount of overall financial assistance given to affected households. These data were collected in <b><a
+          href="https://docs.google.com/spreadsheets/d/1mHMKTTP1koXxcotgoGsoxS540_n7b5ItwQ5U57yDXjQ/edit?usp=sharing">this Google Sheet</a></b>, that links to the above web map.</p>
+    <p>While the data are real, their collection into this Google Sheet was performed specifically to demonstrate how this information can be used with spatial data to increase transparency for the organization. The GeoJSON generated from the Google
+      Sheet using csv2geojson is a file with point data of where each hurricane first made landfall in the United States. To properly realize the prototype, ARC employees would need to input the name and year of the hurricane as well as the latitude
+      and longitude. The location in plain English, link to the ARC site, and additional information are used to build the pop-up. The layout of the spreadsheet is meant to be as simple as possible, so that users could easily enter new data points as
+      well as their corresponding features. It is clear that ARC tracks and maintains information on its disaster relief for reporting purposes; this tool would be a way to collate and repurpose this information. The advantages of using a Google
+      Sheet are primarily the ease of use and conversion into a GeoJSON. The limitations lie in the inability for point data to capture the swath of area affected by a hurricane, especially when a relief response must span all the way from the
+      Caribbean to the United States.</p></br>
   </div>
 
 
@@ -328,15 +326,6 @@
         });
       };
     });
-
-    // Add a search box: https://docs.mapbox.com/mapbox-gl-js/example/mapbox-gl-geocoder/
-    // Add the control to the map.
-    map.addControl(
-      new MapboxGeocoder({
-        accessToken: mapboxgl.accessToken,
-        mapboxgl: mapboxgl
-      })
-    );
 
     // Add pan and zoom controls: https://docs.mapbox.com/mapbox-gl-js/api/#map#addcontrol
     map.addControl(new mapboxgl.NavigationControl());
