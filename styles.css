@@ -1,61 +1,70 @@
 body {
- font-family: 'Georgia';
- color: #ED1B2E;
- padding: 5px;
- text-align: left;
+  padding: 5px;
+  text-align: left;
 }
-p {
+
+h1 {
   font-family: 'Georgia';
+  color: #ED1B2E;
+}
+
+p {
+  font-family: 'Questrial';
   color: black
 }
+
 ul {
- list-style-type: none;
- color: black;
- margin: 1px;
- padding: 1px;
- overflow: hidden;
- background-color: white;
- font-family: 'Georgia';
- text-align: center;
+  list-style-type: none;
+  color: black;
+  margin: 1px;
+  padding: 1px;
+  overflow: hidden;
+  background-color: white;
+  font-family: 'Georgia';
+  text-align: center;
 }
 
 li {
- float: left;
- border-right: 2px solid white;
+  font-family: 'Questrial';
+  float: left;
+  border-right: 2px solid white;
 }
 
 /* Add a border to all( but not the last) list items */
 li:last-child {
- border-right: none;
+  border-right: none;
 }
 
 li a {
- display: block;
- color: black;
- text-align: center;
- padding: 15px 17px;
- text-decoration: none;
+  display: block;
+  color: black;
+  text-align: center;
+  padding: 15px 17px;
+  text-decoration: none;
 }
 
 /* Links will change color when hovered over */
 li a:hover {
- background-color: #9F9FA3;
+  background-color: #9F9FA3;
 }
 
 .active {
- background-color: #9F9FA3;
+  background-color: #9F9FA3;
 }
 
 a {
   color: #ED1B2E;
   text-decoration: none;
 }
-a:hover{
+
+a:hover {
   color: white;
-  background-color : #ED1B2E;
+  background-color: #ED1B2E;
 }
+
 button {
-  background-color: #ED1B2E; /* red */
+  background-color: #ED1B2E;
+  /* red */
   border: 2px solid #fff;
   color: white;
   padding: 15px 32px;
@@ -65,7 +74,8 @@ button {
   font-size: 16px;
   font-family: 'Georgia';
 }
-button:hover{
+
+button:hover {
   background-color: white;
   color: #ED1B2E;
   border: 2px solid #ED1B2E;
