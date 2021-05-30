@@ -4,13 +4,14 @@ body {
 }
 
 h1 {
-  font-family: 'Georgia';
+  font-family: 'Georgia', serif;
   color: #ED1B2E;
 }
 
 p {
-  font-family: 'Questrial';
-  color: black
+  font-family: 'Questrial', sans-serif;
+  color: black;
+  font-size: 18px;
 }
 
 ul {
