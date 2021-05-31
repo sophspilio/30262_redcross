@@ -8,9 +8,22 @@ h1 {
   color: #ED1B2E;
 }
 
-p {
+h2 {
+  font-family: 'Questrial', sans-serif;
+  font-weight:600;
+  font-size:25px;
+  color: black;
+}
+
+h3 {
   font-family: 'Questrial', sans-serif;
   color: black;
+  font-size: 18px;
+}
+
+p {
+  font-family: 'Questrial', sans-serif;
+  color: #6d6e70;
   font-size: 18px;
 }
 
